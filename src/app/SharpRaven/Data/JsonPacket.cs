@@ -113,7 +113,10 @@ namespace SharpRaven.Data
                     if (jo == null || (properties = jo.Properties().ToArray()).Length != 2 || properties[0].Name != "Key"
                         || properties[1].Name != "Value")
                     {
-                        result.Merge(o);
+                        foreach (JObject innerData in o)
+                        {
+                            result.Add(innerData);
+                        }
                         continue;
                     }
 
@@ -126,11 +129,17 @@ namespace SharpRaven.Data
                 result = JObject.FromObject(extra);
 
             var jExceptionData = JObject.FromObject(exceptionData);
-            result.Merge(jExceptionData);
+
+            foreach (var property in jExceptionData)
+            {
+                string name = property.Key;
+                JToken value = property.Value;
+
+                result.Add(property.Key, property.Value);
+            }
 
             return result;
         }
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonPacket"/> class.
