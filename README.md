@@ -1,3 +1,10 @@
+# Changes in this fork:
+- Project updated to compile for .NET 4.6.1
+- Removed Newtonsoft.Json reference
+- Added RebornBuddy reference
+- Updated project to use Newtonsoft.Json bundled with RebornBuddy
+- Some stuff was broken after removing Newtonsoft.Json reference because version bundled with RebornBuddy is older. Did some changes to make it work properly.
+
 # SharpRaven
 
 SharpRaven is the .NET client for [Sentry](https://getsentry.com/welcome/).
